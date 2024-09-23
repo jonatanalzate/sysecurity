@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('login') }}"><button>Iniciar Sesión</button></a>
+<div>
+    <h1>La mejor solución para tu empresa</h1>
+    <p>En Systems Security and Technology, nos dedicamos a proteger lo que más valoras: tus datos y tu negocio. En un entorno digital en constante evolución, nuestras soluciones personalizadas en tecnología y ciberseguridad están diseñadas para garantizar la continuidad, seguridad y crecimiento de tu empresa. Con un enfoque innovador y estratégico, te ayudamos a mantenerte a la vanguardia, adaptándote a los desafíos y oportunidades del mundo digital de manera segura y eficiente.</p>
+    <img src="/static/images/hero.jpg" alt="Imagen Derecha" class="side-image right">
+</div>
+{% endblock %}
