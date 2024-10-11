@@ -1,16 +1,36 @@
 {% extends "base.html" %}
 
-{% block title %}Nosotros{% endblock %}
+{% block title %}Nosotros - SSecurity{% endblock %}
 
 {% block content %}
-    <h1>Sobre Nosotros</h1>
-    <p>Nos convertiremos en líderes en ciberseguridad y tecnología, guiando a nuestros clientes hacia la excelencia operativa. No solo protegemos tus datos con soluciones avanzadas y personalizadas, sino que también orientamos a tu equipo para que adopte las mejores prácticas en TI. Implementamos modelos como ITIL y COBIT para asegurar que cada empleado aproveche al máximo su potencial, cumpliendo con las normativas de tu empresa mientras trabaja bajo un modelo tecnológico optimizado por SST.</p>
-    <p>
-       <h2>Valores</h2>
-       <p>En SST, creemos que la confianza, la innovación y la adaptabilidad son la base de una sólida relación con nuestros clientes. Nos comprometemos a ofrecer soluciones tecnológicas personalizadas, ajustándonos a las necesidades específicas de cada empresa y manteniendo los más altos estándares de calidad en cada proyecto que emprendemos.</p>
-    </p>
-    <p>
-       <h2>Enfoque</h2>
-       <p>Entendemos que cada negocio es único. Es por eso que trabajamos de la mano con nuestros clientes para diseñar e implementar estrategias que no solo protejan sus datos, sino que también impulsen su crecimiento en un mundo digital competitivo. Desde la seguridad informática hasta la optimización tecnológica, nuestros servicios están diseñados para ayudar a tu empresa a sobresalir.</p> 
-    </p>
+<div class="container mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold text-teal-600 mb-8">Sobre Nosotros</h1>
+    
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-12">
+        <div class="p-6">
+            <p class="text-gray-700 mb-6 leading-relaxed">
+                Nos convertiremos en líderes en ciberseguridad y tecnología, guiando a nuestros clientes hacia la excelencia operativa. No solo protegemos tus datos con soluciones avanzadas y personalizadas, sino que también orientamos a tu equipo para que adopte las mejores prácticas en TI. Implementamos modelos como ITIL y COBIT para asegurar que cada empleado aproveche al máximo su potencial, cumpliendo con las normativas de tu empresa mientras trabaja bajo un modelo tecnológico optimizado por SST.
+            </p>
+        </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="p-6">
+                <h2 class="text-2xl font-semibold text-teal-600 mb-4">Valores</h2>
+                <p class="text-gray-700 leading-relaxed">
+                    En SST, creemos que la confianza, la innovación y la adaptabilidad son la base de una sólida relación con nuestros clientes. Nos comprometemos a ofrecer soluciones tecnológicas personalizadas, ajustándonos a las necesidades específicas de cada empresa y manteniendo los más altos estándares de calidad en cada proyecto que emprendemos.
+                </p>
+            </div>
+        </div>
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="p-6">
+                <h2 class="text-2xl font-semibold text-teal-600 mb-4">Enfoque</h2>
+                <p class="text-gray-700 leading-relaxed">
+                    Entendemos que cada negocio es único. Es por eso que trabajamos de la mano con nuestros clientes para diseñar e implementar estrategias que no solo protejan sus datos, sino que también impulsen su crecimiento en un mundo digital competitivo. Desde la seguridad informática hasta la optimización tecnológica, nuestros servicios están diseñados para ayudar a tu empresa a sobresalir.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

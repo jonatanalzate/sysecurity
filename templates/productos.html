@@ -1,12 +1,38 @@
 {% extends 'base.html' %}
-{% block title %}Productos{% endblock %}
+{% block title %}Productos - SSecurity{% endblock %}
 {% block content %}
-<h1>Productos</h1>
-<p1>Nuestros productos están diseñados para brindar la máxima protección en seguridad informática. Ofrecemos desde firewalls avanzados hasta software de monitoreo inteligente, adaptados a las necesidades de cada negocio. Contamos con la solución ideal para proteger y optimizar tu empresa, sin importar su tamaño o sector.</p1>
-<h2>
-    <p>Servidores</p>
-    <p>Firewalls</p>
-    <p>Monitoreo</p>
-    <p>Comunicaciones</p>
-</h2>
+<div class="container mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold text-teal-600 mb-8">Nuestros Productos</h1>
+    
+    <p class="text-gray-700 mb-12 leading-relaxed">
+        Nuestros productos están diseñados para brindar la máxima protección en seguridad informática. Ofrecemos desde firewalls avanzados hasta software de monitoreo inteligente, adaptados a las necesidades de cada negocio. Contamos con la solución ideal para proteger y optimizar tu empresa, sin importar su tamaño o sector.
+    </p>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="p-6">
+                <h2 class="text-xl font-semibold text-teal-600 mb-4">Servidores</h2>
+                <p class="text-gray-700">Soluciones de servidores robustas y escalables para todas tus necesidades de infraestructura.</p>
+            </div>
+        </div>
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="p-6">
+                <h2 class="text-xl font-semibold text-teal-600 mb-4">Firewalls</h2>
+                <p class="text-gray-700">Protección avanzada contra amenazas con nuestros firewalls de última generación.</p>
+            </div>
+        </div>
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="p-6">
+                <h2 class="text-xl font-semibold text-teal-600 mb-4">Monitoreo</h2>
+                <p class="text-gray-700">Herramientas de monitoreo inteligente para mantener tus sistemas seguros y optimizados.</p>
+            </div>
+        </div>
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="p-6">
+                <h2 class="text-xl font-semibold text-teal-600 mb-4">Comunicaciones</h2>
+                <p class="text-gray-700">Soluciones de comunicación seguras y eficientes para tu empresa.</p>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

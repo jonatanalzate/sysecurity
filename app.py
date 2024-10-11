@@ -8,7 +8,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__)
 app.config.from_object(Config)
-app.secret_key = 'your_secret_key'  # Añadido: Llave secreta para manejar sesiones
+app.secret_key = 'your_secret_key'  # Llave secreta para manejar sesiones
 db.init_app(app)
 
 def create_tables():
@@ -35,7 +35,6 @@ def productos():
 def contacto():
     return render_template('contacto.html')
 
-# Añadido: Ruta para el inicio de sesión
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
@@ -43,33 +42,31 @@ def login():
         username = request.form['username']
         password = request.form['password']
 
-        # Consulta a la base de datos para buscar el usuario
+        # Busca al usuario por nombre de usuario
         user = Usuario.query.filter_by(username=username).first()
 
         if user is None:
             error = 'Usuario no encontrado'
-        #elif not check_password_hash(user.password, password):  # Verificación de la contraseña
-        elif user.password != password:  # Comparar contraseñas en texto plano
+        elif user.password != password:  # Compara contraseñas en texto plano
             error = 'Contraseña incorrecta'
         else:
-            session['username'] = username  # Guardar la sesión
-            return redirect(url_for('plataforma'))  # Redirigir al área privada
+            session['username'] = username  # Guarda la sesión
+            return redirect(url_for('plataforma'))  # Redirige al área privada
 
     return render_template('login.html', error=error)
 
-# Añadido: Ruta para la página de la plataforma, solo accesible tras el login
 @app.route('/plataforma')
 def plataforma():
     if 'username' not in session:
-        return redirect(url_for('login'))  # Si no está autenticado, redirigir al login
+        return redirect(url_for('login'))  # Redirigir al login si no está autenticado
     return render_template('plataforma.html', username=session['username'])
 
-# Añadido: Ruta para cerrar sesión
 @app.route('/logout')
 def logout():
     session.pop('username', None)  # Eliminar la sesión
     return redirect(url_for('login'))
 
 if __name__ == '__main__':
-    create_tables()
+    with app.app_context():
+        create_tables()  # Crear las tablas solo al iniciar la aplicación
     app.run(debug=True)
