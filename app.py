@@ -2,7 +2,7 @@ import pymysql
 pymysql.install_as_MySQLdb()
 
 from flask import Flask, render_template, request, redirect, url_for, session
-from models import Usuario, db
+from models import Usuario, Mensaje, db
 from config import Config
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -31,8 +31,25 @@ def servicios():
 def productos():
     return render_template('productos.html')
 
-@app.route('/contacto')
+@app.route('/contacto', methods=['GET', 'POST'])
 def contacto():
+    if request.method == 'POST':
+        nombre = request.form['nombre']
+        email = request.form['email']
+        mensaje = request.form['mensaje']
+
+        # Crear una nueva instancia de Mensaje
+        nuevo_mensaje = Mensaje(nombre=nombre, email=email, mensaje=mensaje)
+
+        try:
+            db.session.add(nuevo_mensaje)
+            db.session.commit()
+            return render_template('contacto.html', success="Mensaje enviado correctamente.")
+        except Exception as e:
+            db.session.rollback()
+            print(f"Error al guardar el mensaje: {str(e)}")
+            return render_template('contacto.html', error="Hubo un error al enviar el mensaje.")
+
     return render_template('contacto.html')
 
 @app.route('/login', methods=['GET', 'POST'])
