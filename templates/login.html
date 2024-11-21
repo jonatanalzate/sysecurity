@@ -5,28 +5,99 @@
 {% block content %}
 <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
     <div class="p-8">
-        <h2 class="text-2xl font-bold text-teal-600 mb-6">Inicio de Sesión</h2>
-        <form method="POST" action="{{ url_for('login') }}" class="space-y-6">
-            <div>
-                <label for="username" class="block text-sm font-medium text-gray-700">Usuario:</label>
-                <input type="text" id="username" name="username" required
-                       class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
-            </div>
-            <div>
-                <label for="password" class="block text-sm font-medium text-gray-700">Contraseña:</label>
-                <input type="password" id="password" name="password" required
-                       class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
-            </div>
-            <div>
-                <button type="submit"
-                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
-                    Ingresar
-                </button>
-            </div>
-        </form>
-        {% if error %}
-            <p class="mt-4 text-sm text-red-600">{{ error }}</p>
-        {% endif %}
+        <!-- Pestañas de navegación -->
+        <div class="flex mb-6 border-b">
+            <button onclick="showTab('login')" class="px-4 py-2 text-teal-600 border-b-2 border-teal-600" id="loginTab">Iniciar Sesión</button>
+            <button onclick="showTab('register')" class="px-4 py-2 text-gray-500" id="registerTab">Registrarse</button>
+        </div>
+
+        <!-- Formulario de Login -->
+        <div id="loginForm">
+            <h2 class="text-2xl font-bold text-teal-600 mb-6">Inicio de Sesión</h2>
+            <form method="POST" action="{{ url_for('login') }}" class="space-y-6">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700">Usuario:</label>
+                    <input type="text" id="username" name="username" required
+                           class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Contraseña:</label>
+                    <input type="password" id="password" name="password" required
+                           class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                </div>
+                <div>
+                    <button type="submit"
+                            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+                        Ingresar
+                    </button>
+                </div>
+            </form>
+            {% if error %}
+                <p class="mt-4 text-sm text-red-600">{{ error }}</p>
+            {% endif %}
+        </div>
+
+        <!-- Formulario de Registro -->
+        <div id="registerForm" class="hidden">
+            <h2 class="text-2xl font-bold text-teal-600 mb-6">Registro de Usuario</h2>
+            <form method="POST" action="{{ url_for('register') }}" class="space-y-6">
+                <div>
+                    <label for="reg_name" class="block text-sm font-medium text-gray-700">Nombre Completo:</label>
+                    <input type="text" id="reg_name" name="name" required
+                           class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
+                           onchange="generateUsername()">
+                </div>
+                <div>
+                    <label for="reg_username" class="block text-sm font-medium text-gray-700">Usuario:</label>
+                    <input type="text" id="reg_username" name="username" required readonly
+                           class="mt-1 block w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md shadow-sm">
+                    <p class="text-xs text-gray-500 mt-1">El usuario se generará automáticamente</p>
+                </div>
+                <div>
+                    <label for="reg_email" class="block text-sm font-medium text-gray-700">Email:</label>
+                    <input type="email" id="reg_email" name="email" required
+                           class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                </div>
+                <div>
+                    <label for="reg_password" class="block text-sm font-medium text-gray-700">Contraseña:</label>
+                    <input type="password" id="reg_password" name="password" required
+                           class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500">
+                </div>
+                <div>
+                    <button type="submit"
+                            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+                        Registrarse
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
+
+<script>
+function showTab(tab) {
+    if (tab === 'login') {
+        document.getElementById('loginForm').classList.remove('hidden');
+        document.getElementById('registerForm').classList.add('hidden');
+        document.getElementById('loginTab').classList.add('text-teal-600', 'border-b-2', 'border-teal-600');
+        document.getElementById('registerTab').classList.remove('text-teal-600', 'border-b-2', 'border-teal-600');
+    } else {
+        document.getElementById('registerForm').classList.remove('hidden');
+        document.getElementById('loginForm').classList.add('hidden');
+        document.getElementById('registerTab').classList.add('text-teal-600', 'border-b-2', 'border-teal-600');
+        document.getElementById('loginTab').classList.remove('text-teal-600', 'border-b-2', 'border-teal-600');
+    }
+}
+
+function generateUsername() {
+    const fullName = document.getElementById('reg_name').value.toLowerCase();
+    const names = fullName.split(' ');
+    if (names.length >= 2) {
+        const firstName = names[0];
+        const lastName = names[names.length - 1];
+        const username = firstName[0] + lastName;
+        document.getElementById('reg_username').value = username;
+    }
+}
+</script>
 {% endblock %}

@@ -1,20 +1,166 @@
 {% extends "base.html" %}
 
-{% block title %}Contacto{% endblock %}
+{% block title %}Plataforma{% endblock %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
-</head>
-<body>
-    <h1>Bienvenido a la Plataforma</h1>
-    <p>Usuario: {{ session['username'] }}</p>
-    <!-- Contenido adicional de la plataforma -->
-</body>
-</html>
+<div class="platform-container">
+    <header class="platform-header">
+        <h1>Bienvenido a tu Plataforma</h1>
+        <p class="user-info">Usuario: {{ session['username'] }}</p>
+    </header>
+
+    <div class="modules-grid">
+        <!-- Módulo de Asesorías -->
+        <div class="module-wrapper">
+            <div class="module-card">
+                <div class="module-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h2>Asesorías</h2>
+                <p>Agenda una sesión con nuestros expertos para resolver tus dudas y optimizar tus procesos.</p>
+            </div>
+            <a href="#" class="module-button">Agendar Asesoría</a>
+        </div>
+
+        <!-- Módulo de Soporte Técnico -->
+        <div class="module-wrapper">
+            <div class="module-card">
+                <div class="module-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h2>Soporte Técnico</h2>
+                <p>Adquiere paquetes de horas para soporte técnico especializado.</p>
+            </div>
+            <a href="#" class="module-button">Comprar Horas</a>
+        </div>
+
+        <!-- Módulo de Certificaciones -->
+        <div class="module-wrapper">
+            <div class="module-card">
+                <div class="module-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <h2>Certificaciones</h2>
+                <p>Prepárate para certificaciones en ISO, CCNA y Cyberseguridad.</p>
+            </div>
+            <a href="#" class="module-button">Ver Certificaciones</a>
+        </div>
+
+        <!-- Módulo de Tecnología -->
+        <div class="module-wrapper">
+            <div class="module-card">
+                <div class="module-icon">
+                    <i class="fas fa-server"></i>
+                </div>
+                <h2>Tecnología</h2>
+                <p>Adquiere equipamiento profesional: servidores, switches, routers y más.</p>
+            </div>
+            <a href="#" class="module-button">Ir a Tienda</a>
+        </div>
+    </div>
+</div>
+
+<!-- Añadir FontAwesome para los íconos -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
+    .platform-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .platform-header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .user-info {
+        color: #666;
+        font-size: 1.1em;
+    }
+
+    .modules-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        padding: 20px;
+    }
+
+    .module-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        height: 100%;
+    }
+
+    .module-card {
+        background: white;
+        border-radius: 10px;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        width: 100%;
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .module-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .module-icon {
+        font-size: 2.5em;
+        color: #007bff;
+        margin: 20px 0;
+    }
+
+    .module-card h2 {
+        color: #333;
+        margin: 0 0 15px 0;
+        font-size: 1.5em;
+    }
+
+    .module-card p {
+        color: #666;
+        margin: 0;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 15px;
+    }
+
+    .module-button {
+        display: inline-block;
+        width: 80%;
+        padding: 12px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        text-align: center;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+    }
+
+    .module-button:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+        .modules-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .module-card {
+            height: 250px;
+        }
+    }
+</style>
 {% endblock %}

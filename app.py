@@ -42,16 +42,15 @@ def login():
         username = request.form['username']
         password = request.form['password']
 
-        # Busca al usuario por nombre de usuario
         user = Usuario.query.filter_by(username=username).first()
 
         if user is None:
             error = 'Usuario no encontrado'
-        elif user.password != password:  # Compara contraseñas en texto plano
+        elif not check_password_hash(user.password, password):  # Verifica la contraseña hasheada
             error = 'Contraseña incorrecta'
         else:
-            session['username'] = username  # Guarda la sesión
-            return redirect(url_for('plataforma'))  # Redirige al área privada
+            session['username'] = username
+            return redirect(url_for('plataforma'))
 
     return render_template('login.html', error=error)
 
@@ -65,6 +64,38 @@ def plataforma():
 def logout():
     session.pop('username', None)  # Eliminar la sesión
     return redirect(url_for('login'))
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        name = request.form['name']
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        
+        # Verificar si el usuario ya existe
+        user_exists = Usuario.query.filter_by(username=username).first()
+        if user_exists:
+            return render_template('login.html', error="El usuario ya existe")
+        
+        # Crear nuevo usuario con contraseña hasheada
+        new_user = Usuario(
+            name=name,
+            username=username,
+            email=email,
+            password=generate_password_hash(password, method='pbkdf2:sha256')
+        )
+        
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect(url_for('login'))
+        except Exception as e:
+            db.session.rollback()
+            print(f"Error al registrar usuario: {str(e)}")  # Para debugging
+            return render_template('login.html', error="Error al registrar usuario")
+            
+    return render_template('login.html')
 
 if __name__ == '__main__':
     with app.app_context():
